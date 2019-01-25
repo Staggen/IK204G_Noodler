@@ -1,0 +1,21 @@
+﻿@model IEnumerable<NoodlerMVC.Models.RequestViewModels>
+<div>
+    @foreach (var item in Model) {
+        <div class="card border border-secondary bg-light">
+            <div class="card-body">
+                <div class="media">
+                    <a href="@Url.Action("Index", "Profile", new { id = item.UserId })" class="card-link badge badge-light">
+                        <img class="mr-1" src="@Url.Action("RenderProfileImage", "Profile", new { id = item.UserId })" height="32" width="32" />
+                        <span class="">@item.FullName</span>
+                    </a>
+                    <div class="media-body ml-5">
+                        <div class="float-right">
+                            <button class="btn btn-success NotificationsAcceptBtn" data-id="@item.UserId">Accept</button>
+                            <button class="btn btn-danger NotificationsDeclineBtn" data-id="@item.UserId">Decline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
