@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Noodler", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            @if (Request.IsAuthenticated) {
+                <!-- Here goes the popup div for notifications. It has to be here to not randomly call the logoutform for no apparent reason?.. -->
+                <div id="NotificationPopUpDiv" class="d-none bg-secondary text-white">
+
+                </div>
+            }
+
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Search", "Index", "Search", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Noodler Incorporated</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @if (Request.IsAuthenticated) {
+        @Scripts.Render("~/bundles/popper")
+    }
+    @RenderSection("scripts", required: false)
+</body>
+</html>

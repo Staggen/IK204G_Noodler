@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNet.Identity
+@using DataLayer.Models
+@using DataLayer.Repositories
+@if (Request.IsAuthenticated) {
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+        @Html.AntiForgeryToken()
+        string userId = User.Identity.GetUserId();
+        ApplicationDbContext context = new ApplicationDbContext();
+        ProfileRepository profiles = new ProfileRepository(context);
+        ProfileModels profile = profiles.Get(userId);
+        string name = null;
+        if (profile != null) {
+            name = profile.FirstName + " " + profile.LastName;
+        } else {
+            name = User.Identity.Name;
+        }
+
+        
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <button type="button" class="btn btn-secondary" id="GlobalNotificationButton">
+                    Notifications <span class="badge badge-light" id="NotificationNumberSpan"></span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Profile", new { id = userId })" class="nav-link">
+                    @if (name != User.Identity.Name) {
+                        <img src="@Url.Action("RenderProfileImage", "Profile", new { id = userId })" height="30" width="30" />
+                    }@name
+                </a>
+            </li>
+            <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a></li>
+        </ul>
+    }
+} else {
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+        <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    </ul>
+}
