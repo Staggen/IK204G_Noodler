@@ -2,19 +2,50 @@
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
+    string currentUserId = User.Identity.GetUserId();
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4">
         <img src="@Url.Action("RenderProfileImage", "Profile", new { userId = Model.Id })" id="ProfileImage" height="232" width="232" />
-        @if (Request.IsAuthenticated && !User.Identity.GetUserId().Equals(Model.Id)) {
+        @if (Request.IsAuthenticated && !currentUserId.Equals(Model.Id)) {
             <br />
-            <div class="d-none" id="RequestBtnGroup">
-                <button class="btn btn-success" id="AcceptBtn">Accept</button>
-                <button class="btn btn-danger" id="DeclineBtn">Decline</button>
-                <br />
-            </div>
-            <button class="btn btn-info" id="FriendBtn">Send Friend Request</button>
+            switch (ViewBag.ProfileRelation) {
+                case "Friends":
+                    <div class="d-none" id="RequestBtnGroup">
+                        <button class="btn btn-success" id="AcceptBtn">Accept</button>
+                        <button class="btn btn-danger" id="DeclineBtn">Decline</button>
+                        <br />
+                    </div>
+                    <button class="btn btn-danger" id="FriendBtn">Remove Friend</button>
+                    break;
+                case "IncomingRequest":
+                    <div class="" id="RequestBtnGroup">
+                        <button class="btn btn-success" id="AcceptBtn">Accept</button>
+                        <button class="btn btn-danger" id="DeclineBtn">Decline</button>
+                        <br />
+                    </div>
+                    <button class="btn btn-info" id="FriendBtn">Incoming Friend Request</button>
+                    break;
+                case "OutgoingRequest":
+                    <div class="d-none" id="RequestBtnGroup">
+                        <button class="btn btn-success" id="AcceptBtn">Accept</button>
+                        <button class="btn btn-danger" id="DeclineBtn">Decline</button>
+                        <br />
+                    </div>
+                    <button class="btn btn-warning" id="FriendBtn">Cancel Friend Request</button>
+                    break;
+                case "NotFriends":
+                    <div class="d-none" id="RequestBtnGroup">
+                        <button class="btn btn-success" id="AcceptBtn">Accept</button>
+                        <button class="btn btn-danger" id="DeclineBtn">Decline</button>
+                        <br />
+                    </div>
+                    <button class="btn btn-info" id="FriendBtn">Send Friend Request</button>
+                    break;
+                default:
+                    break; // This should never happen
+            }
         }
 
         <br /><strong>Name</strong><br />
@@ -28,7 +59,7 @@
         <br />
         <strong>@Html.DisplayNameFor((m) => m.Gender)</strong><br />
         @Html.DisplayFor((m) => m.Gender)
-        @if (Request.IsAuthenticated && User.Identity.GetUserId().Equals(Model.Id)) {
+        @if (Request.IsAuthenticated && currentUserId.Equals(Model.Id)) {
             <br />
             <div>
                 @Html.ActionLink("Change profile information", "Manage", "Profile", new { area = "" }, new { @class = "btn btn-info changeProfileBtn" })
@@ -65,22 +96,29 @@
             </div>
         }
         <hr />
-    </div>
-    <div class="col-md-5" id="PostWallDiv">
-        @if(Model.FirstName.EndsWith("s")) {
-        <h1>@Model.FirstName' Wall</h1>
-        } else {
-        <h1>@Model.FirstName's Wall</h1>
+        @if (Request.IsAuthenticated && currentUserId.Equals(Model.Id)) {
+            <div>
+                <h1>Latest Visitors</h1>
+                <div class="list-group list-group-flush" id="VisitorList">
+                    <!-- Will be filled out with the visitors -->
+                </div>
+            </div>
         }
-        @Html.Partial("_Wall", Model.Posts)
+    </div>
+    <div class="col-lg-5" id="PostWallDiv">
+        @Html.Partial("_PostWall", Model.Posts)
         <hr />
     </div>
-    <div class="col-md-3" id="FriendListDiv">
+    <div class="col-lg-3" id="FriendListDiv">
         @Html.Partial("_Friends", Model.Friends)
     </div>
 </div>
+
 @section Scripts{
     <script src="~/Scripts/custom/profile-requests.js"></script>
     <script src="~/Scripts/custom/profile-posts.js"></script>
     <script src="~/Scripts/custom/profile-friends.js"></script>
+    @if (Request.IsAuthenticated && currentUserId.Equals(Model.Id)) {
+        <script src="~/Scripts/custom/profile-visitors.js"></script>
+    }
 }

@@ -16,6 +16,7 @@ namespace NoodlerMVC.Controllers {
         private ProfileRepository profileRepository;
         private PostRepository postRepository;
         private FriendRepository friendRepository;
+        private RequestRepository requestRepository;
         private VisitorRepository visitorRepository;
 
         public ProfileController() {
@@ -24,6 +25,7 @@ namespace NoodlerMVC.Controllers {
             postRepository = new PostRepository(context);
             friendRepository = new FriendRepository(context);
             visitorRepository = new VisitorRepository(context);
+            requestRepository = new RequestRepository(context);
         }
 
         // GET: Profile
@@ -33,6 +35,22 @@ namespace NoodlerMVC.Controllers {
             if (profileId == null) {
                 profileId = currentUserId;
             }
+
+            // Add user to visitor list for the visited profile, but remove them first if they're already in the 5 latest
+            if (!string.Equals(currentUserId, (string)profileId)) {
+                List<VisitorModels> allVisitors = visitorRepository.GetAllVisitorsByUserId((string)profileId); // Everyone who has looked at this profile
+                if (allVisitors.Any((v) => v.VisitFromId.Equals(currentUserId))) { // If current user has already visited this profile
+                    visitorRepository.Remove(visitorRepository.GetVisitIdByVisitFromUserId((string)profileId, currentUserId)); // Remove the visit by the current user
+                }
+                VisitorModels visitor = new VisitorModels {
+                    VisitDateTime = DateTime.Now,
+                    VisitFromId = currentUserId,
+                    VisitToId = (string)profileId
+                };
+                visitorRepository.Add(visitor);
+                visitorRepository.Save();
+            }
+
             ProfileModels userProfile = profileRepository.Get((string)profileId);
             List<PostModels> posts = postRepository.GetAllPostsForUserById((string)profileId);
             List<FriendModels> friends = friendRepository.GetAllFriendsByUserId((string)profileId);
@@ -51,6 +69,8 @@ namespace NoodlerMVC.Controllers {
                 Friends = friendViewModelsForUsers,
                 ProfileImage = userProfile.ProfileImage
             };
+
+            ViewBag.ProfileRelation = GetProfileRelation((string)profileId);
 
             return View(userProfileViewModel);
         }
@@ -141,7 +161,7 @@ namespace NoodlerMVC.Controllers {
         public PartialViewResult UpdatePostWall(string Id) {
             List<PostModels> posts = postRepository.GetAllPostsForUserById(Id);
             PostViewModelsForUsers model = ConvertPostToPostViewModelForUsers(posts, Id);
-            return PartialView("_Wall", model);
+            return PartialView("_PostWall", model);
         }
 
         public PartialViewResult UpdateFriendList(string Id) {
@@ -203,7 +223,20 @@ namespace NoodlerMVC.Controllers {
             };
             return model;
         }
-        
+
+        public string GetProfileRelation(string ProfileId) {
+            string currentUserId = User.Identity.GetUserId();
+            if (friendRepository.IsFriendAlready(currentUserId, ProfileId)) {
+                return "Friends";
+            } else if (requestRepository.IncomingRequestPending(currentUserId, ProfileId)) {
+                return "IncomingRequest";
+            } else if (requestRepository.OutgoingRequestPending(currentUserId, ProfileId)) {
+                return "OutgoingRequest";
+            } else {
+                return "NotFriends";
+            }
+        }
+
         public void ExportProfile() {
             string currentUserId = User.Identity.GetUserId();
 
@@ -261,7 +294,7 @@ namespace NoodlerMVC.Controllers {
                 Response.WriteFile(Server.MapPath("~/Content/ExportedProfiles/" + User.Identity.GetUserId() + ".xml"));
                 Response.Flush();
                 Response.End();
-            } catch(Exception) {
+            } catch (Exception) {
                 // Aww shieet
             }
         }

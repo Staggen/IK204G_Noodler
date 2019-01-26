@@ -1,13 +1,5 @@
 ﻿$(document).ready(() => {
     console.log("Script loaded: profile-requests.js");
-    var currentUrl = window.location.href;
-    var urlArray = currentUrl.split("/Profile/Index/");
-    if (urlArray.length >= 2) {
-        var Id = urlArray[1];
-        IsFriend(Id);
-        IncomingRequest(Id);
-        OutgoingRequest(Id);
-    }
 });
 
 $("#FriendBtn").on("click", HandleRequest);
@@ -26,20 +18,7 @@ function HandleRequest() {
             dataType: "JSON",
             success: function (data) {
                 if (data.Result) {
-                    if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                        $("#RequestBtnGroup").addClass("d-none");
-                    }
-
-                    $("#FriendBtn").text("Send Friend Request");
-                    if ($("#FriendBtn").hasClass("btn-warning")) {
-                        $("#FriendBtn").removeClass("btn-warning");
-                    }
-                    if ($("#FriendBtn").hasClass("btn-danger")) {
-                        $("#FriendBtn").removeClass("btn-danger");
-                    }
-                    if (!$("#FriendBtn").hasClass("btn-info")) {
-                        $("#FriendBtn").addClass("btn-info");
-                    }
+                    ButtonGroupNotFriends();
                 }
                 console.log("HandleRequest => (Cancel Request) Success");
             },
@@ -56,20 +35,7 @@ function HandleRequest() {
             dataType: "JSON",
             success: function (data) {
                 if (data.Result) {
-                    if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                        $("#RequestBtnGroup").addClass("d-none");
-                    }
-
-                    $("#FriendBtn").text("Send Friend Request");
-                    if ($("#FriendBtn").hasClass("btn-warning")) {
-                        $("#FriendBtn").removeClass("btn-warning");
-                    }
-                    if ($("#FriendBtn").hasClass("btn-danger")) {
-                        $("#FriendBtn").removeClass("btn-danger");
-                    }
-                    if (!$("#FriendBtn").hasClass("btn-info")) {
-                        $("#FriendBtn").addClass("btn-info");
-                    }
+                    ButtonGroupNotFriends();
                 }
                 console.log("HandleRequest() => (Remove Friend) Success");
             },
@@ -86,20 +52,7 @@ function HandleRequest() {
             dataType: "JSON",
             success: function (data) {
                 if (data.Result) {
-                    if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                        $("#RequestBtnGroup").addClass("d-none");
-                    }
-
-                    $("#FriendBtn").text("Cancel Friend Request");
-                    if ($("#FriendBtn").hasClass("btn-info")) {
-                        $("#FriendBtn").removeClass("btn-info");
-                    }
-                    if ($("#FriendBtn").hasClass("btn-danger")) {
-                        $("#FriendBtn").removeClass("btn-danger");
-                    }
-                    if (!$("#FriendBtn").hasClass("btn-warning")) {
-                        $("#FriendBtn").addClass("btn-warning");
-                    }
+                    ButtonGroupOutgoing();
                 }
                 console.log("HandleRequest() => (Send Request) Success");
             },
@@ -124,20 +77,7 @@ function NotificationsAcceptRequest() {
         dataType: "JSON",
         success: function (data) {
             if (data.Result) {
-                if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                    $("#RequestBtnGroup").addClass("d-none");
-                }
-
-                $("#FriendBtn").text("Remove Friend");
-                if ($("#FriendBtn").hasClass("btn-info")) {
-                    $("#FriendBtn").removeClass("btn-info");
-                }
-                if ($("#FriendBtn").hasClass("btn-warning")) {
-                    $("#FriendBtn").removeClass("btn-warning");
-                }
-                if (!$("#FriendBtn").hasClass("btn-danger")) {
-                    $("#FriendBtn").addClass("btn-danger");
-                }
+                ButtonGroupFriends();
             }
             console.log("AcceptRequest() => Success");
         },
@@ -157,20 +97,7 @@ function NotificationsDeclineRequest() {
         dataType: "JSON",
         success: function (data) {
             if (data.Result) {
-                if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                    $("#RequestBtnGroup").addClass("d-none");
-                }
-
-                $("#FriendBtn").text("Send Friend Request");
-                if ($("#FriendBtn").hasClass("btn-danger")) {
-                    $("#FriendBtn").removeClass("btn-danger");
-                }
-                if ($("#FriendBtn").hasClass("btn-warning")) {
-                    $("#FriendBtn").removeClass("btn-warning");
-                }
-                if (!$("#FriendBtn").hasClass("btn-info")) {
-                    $("#FriendBtn").addClass("btn-info");
-                }
+                ButtonGroupNotFriends();
             }
             console.log("DeclineRequest() => Success");
         },
@@ -180,92 +107,70 @@ function NotificationsDeclineRequest() {
     });
 }
 
-function OutgoingRequest(Id) {
-    $.ajax({
-        url: "/Friend/OutgoingRequestPending/" + Id,
-        type: "POST",
-        dataType: "JSON",
-        success: function (data) {
-            if (data.Result) {
-                if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                    $("#RequestBtnGroup").addClass("d-none");
-                }
+function ButtonGroupNotFriends() {
+    if (!$("#RequestBtnGroup").hasClass("d-none")) {
+        $("#RequestBtnGroup").addClass("d-none");
+    }
 
-                $("#FriendBtn").text("Cancel Friend Request");
-                if ($("#FriendBtn").hasClass("btn-info")) {
-                    $("#FriendBtn").removeClass("btn-info");
-                }
-                if ($("#FriendBtn").hasClass("btn-danger")) {
-                    $("#FriendBtn").removeClass("btn-danger");
-                }
-                if (!$("#FriendBtn").hasClass("btn-warning")) {
-                    $("#FriendBtn").addClass("btn-warning");
-                }
-            }
-            console.log("OutgoingRequest() => Success");
-        },
-        error: () => {
-            console.log("OutgoingRequest() => Error");
-        }
-    });
+    $("#FriendBtn").text("Send Friend Request");
+    if ($("#FriendBtn").hasClass("btn-danger")) {
+        $("#FriendBtn").removeClass("btn-danger");
+    }
+    if ($("#FriendBtn").hasClass("btn-warning")) {
+        $("#FriendBtn").removeClass("btn-warning");
+    }
+    if (!$("#FriendBtn").hasClass("btn-info")) {
+        $("#FriendBtn").addClass("btn-info");
+    }
 }
 
-function IncomingRequest(Id) {
-    $.ajax({
-        url: "/Friend/IncomingRequestPending/" + Id,
-        type: "POST",
-        dataType: "JSON",
-        success: function (data) {
-            if (data.Result) {
-                if ($("#RequestBtnGroup").hasClass("d-none")) {
-                    $("#RequestBtnGroup").removeClass("d-none");
-                }
+function ButtonGroupFriends() {
+    if (!$("#RequestBtnGroup").hasClass("d-none")) {
+        $("#RequestBtnGroup").addClass("d-none");
+    }
 
-                $("#FriendBtn").text("Incoming Friend Request");
-                if ($("#FriendBtn").hasClass("btn-danger")) {
-                    $("#FriendBtn").removeClass("btn-danger");
-                }
-                if ($("#FriendBtn").hasClass("btn-warning")) {
-                    $("#FriendBtn").removeClass("btn-warning");
-                }
-                if (!$("#FriendBtn").hasClass("btn-info")) {
-                    $("#FriendBtn").addClass("btn-info");
-                }
-            }
-            console.log("IncomingRequest() => Success");
-        },
-        error: () => {
-            console.log("IncomingRequest() => Error");
-        }
-    });
+    $("#FriendBtn").text("Remove Friend");
+    if ($("#FriendBtn").hasClass("btn-info")) {
+        $("#FriendBtn").removeClass("btn-info");
+    }
+    if ($("#FriendBtn").hasClass("btn-warning")) {
+        $("#FriendBtn").removeClass("btn-warning");
+    }
+    if (!$("#FriendBtn").hasClass("btn-danger")) {
+        $("#FriendBtn").addClass("btn-danger");
+    }
 }
 
-function IsFriend(Id) {
-    $.ajax({
-        url: "/Friend/IsFriend/" + Id,
-        type: "POST",
-        dataType: "JSON",
-        success: function (data) {
-            if (data.Result) {
-                if (!$("#RequestBtnGroup").hasClass("d-none")) {
-                    $("#RequestBtnGroup").addClass("d-none");
-                }
+function ButtonGroupIncoming() {
+    if ($("#RequestBtnGroup").hasClass("d-none")) {
+        $("#RequestBtnGroup").removeClass("d-none");
+    }
 
-                $("#FriendBtn").text("Remove Friend");
-                if ($("#FriendBtn").hasClass("btn-info")) {
-                    $("#FriendBtn").removeClass("btn-info");
-                }
-                if ($("#FriendBtn").hasClass("btn-warning")) {
-                    $("#FriendBtn").removeClass("btn-warning");
-                }
-                if (!$("#FriendBtn").hasClass("btn-danger")) {
-                    $("#FriendBtn").addClass("btn-danger");
-                }
-            }
-            console.log("IsFriend() => Success");
-        },
-        error: () => {
-            console.log("IsFriend() => Error");
-        }
-    });
+    $("#FriendBtn").text("Incoming Friend Request");
+    if ($("#FriendBtn").hasClass("btn-danger")) {
+        $("#FriendBtn").removeClass("btn-danger");
+    }
+    if ($("#FriendBtn").hasClass("btn-warning")) {
+        $("#FriendBtn").removeClass("btn-warning");
+    }
+    if (!$("#FriendBtn").hasClass("btn-info")) {
+        $("#FriendBtn").addClass("btn-info");
+    }
+}
+
+function ButtonGroupOutgoing() {
+    if (!$("#RequestBtnGroup").hasClass("d-none")) {
+        $("#RequestBtnGroup").addClass("d-none");
+    }
+
+    $("#FriendBtn").text("Cancel Friend Request");
+    if ($("#FriendBtn").hasClass("btn-info")) {
+        $("#FriendBtn").removeClass("btn-info");
+    }
+    if ($("#FriendBtn").hasClass("btn-danger")) {
+        $("#FriendBtn").removeClass("btn-danger");
+    }
+    if (!$("#FriendBtn").hasClass("btn-warning")) {
+        $("#FriendBtn").addClass("btn-warning");
+    }
 }

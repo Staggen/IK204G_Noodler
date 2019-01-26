@@ -146,7 +146,7 @@ namespace NoodlerMVC.Controllers {
             string currentUserId = User.Identity.GetUserId();
             ProfileModels profile = profileRepository.Get(Id);
             
-            if(friendRepository.IsFriendAlready(profile.Id, currentUserId)) {
+            if(friendRepository.IsFriendAlready(currentUserId, profile.Id)) {
                 return Json(new { Result = true });
             }
             return Json(new { Result = false });

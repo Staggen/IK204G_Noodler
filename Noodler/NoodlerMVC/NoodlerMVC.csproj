@@ -280,6 +280,7 @@
     <Content Include="Scripts\custom\profile-friends.js" />
     <Content Include="Scripts\custom\profile-posts.js" />
     <Content Include="Scripts\custom\profile-requests.js" />
+    <Content Include="Scripts\custom\profile-visitors.js" />
     <Content Include="Scripts\custom\search.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -377,7 +378,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Profile\Manage.cshtml" />
-    <Content Include="Views\Profile\_Wall.cshtml" />
+    <Content Include="Views\Profile\_PostWall.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Profile\_Friends.cshtml" />
     <Content Include="Views\Notifications\_NoNotifications.cshtml" />
