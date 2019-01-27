@@ -86,7 +86,7 @@ function AddPost() {
         }
         $.ajax({
             type: "POST",
-            url: "/api/AjaxApi/",
+            url: "/api/PostApi/",
             data: JSON.stringify(post),
             contentType: "application/json;charset=UTF-8",
             success: () => {
@@ -105,7 +105,7 @@ function DeletePost() {
     var PostId = this.getAttribute("data-post-id");
     $.ajax({
         type: "DELETE",
-        url: "/api/AjaxApi/" + PostId,
+        url: "/api/PostApi/" + PostId,
         contentType: "application/json;charset=UTF-8",
         success: () => {
             Update_Wall();

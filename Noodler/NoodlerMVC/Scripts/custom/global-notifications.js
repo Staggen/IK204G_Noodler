@@ -6,16 +6,16 @@
     ShowNotificationsDiv();
 });
 
-$("#NotificationPopUpDiv").on("click", ".NotificationsAcceptBtn", NotificationsAcceptRequest);
-$("#NotificationPopUpDiv").on("click", ".NotificationsDeclineBtn", NotificationsDeclineRequest);
+$("#NotificationPopUpDiv").on("click", ".NotificationsAcceptBtn", GlobalNotificationsAcceptRequest);
+$("#NotificationPopUpDiv").on("click", ".NotificationsDeclineBtn", GlobalNotificationsDeclineRequest);
 $("#GlobalNotificationButton").on("click", ShowNotificationsDiv);
 
 function ShowNotificationsDiv() {
-    ToggleDisplay();
+    ToggleNotificationPopUpDivDisplay();
 
     var ref = $("#GlobalNotificationButton");
     var pop = $("#NotificationPopUpDiv");
-    var popper = new Popper(ref, pop, {
+    new Popper(ref, pop, {
         placement: "bottom",
         modifiers: {
             offset: {
@@ -29,11 +29,11 @@ function ShowNotificationsDiv() {
     Update_Content();
 }
 
-function ToggleDisplay() {
+function ToggleNotificationPopUpDivDisplay() {
     $("#NotificationPopUpDiv").toggleClass("d-none");
 }
 
-function NotificationsAcceptRequest() {
+function GlobalNotificationsAcceptRequest() {
     var UserId = this.attributes[1].value;
     $.ajax({
         type: "POST",
@@ -42,8 +42,18 @@ function NotificationsAcceptRequest() {
         success: () => {
             Update_Content();
             SetNumberOfNotifications();
+            
+            var currentUrl = window.location.href;
+            var urlArray = currentUrl.split("/Profile/Index/");
+            if (urlArray.length > 1) {
+                if (urlArray[1] == UserId) {
+                    ButtonGroupFriends();
+                }
+                Update_Friends();
+            }
+
             if ($("#NotificationNumberSpan").val() == 0) {
-                ToggleDisplay();
+                ToggleNotificationPopUpDivDisplay();
             }
         },
         error: () => {
@@ -52,7 +62,7 @@ function NotificationsAcceptRequest() {
     });
 }
 
-function NotificationsDeclineRequest() {
+function GlobalNotificationsDeclineRequest() {
     var UserId = this.attributes[1].value;
     $.ajax({
         type: "POST",
@@ -61,8 +71,17 @@ function NotificationsDeclineRequest() {
         success: () => {
             Update_Content();
             SetNumberOfNotifications();
+            
+            var currentUrl = window.location.href;
+            var urlArray = currentUrl.split("/Profile/Index/");
+            if (urlArray.length > 1) {
+                if (urlArray[1] == UserId) {
+                    ButtonGroupNotFriends();
+                }
+            }
+
             if ($("#NotificationNumberSpan").val() == 0) {
-                ToggleDisplay();
+                ToggleNotificationPopUpDivDisplay();
             }
         },
         error: () => {

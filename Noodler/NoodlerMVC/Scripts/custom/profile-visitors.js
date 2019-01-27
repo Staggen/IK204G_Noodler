@@ -6,7 +6,7 @@
 function GetVisitors() {
     $.ajax({
         type: "GET",
-        url: "/api/AjaxApi/",
+        url: "/api/VisitorApi/",
         success: function (data) {
             var listOfVisitors = "";
             $.each(data, function (i, item) {
@@ -19,7 +19,9 @@ function GetVisitors() {
             $("#VisitorList").html(listOfVisitors);
             console.log("GetVisitors() => Success");
         },
-        error: () => {
+        error: function(xhr, status, error) {
+            var err = JSON.parse(xhr.responseText);
+            console.log(err.Message);
             console.log("Error: Unable to load latest visitors.");
         }
     });

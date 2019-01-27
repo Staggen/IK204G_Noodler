@@ -230,13 +230,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AjaxApiController.cs" />
+    <Compile Include="Controllers\PostApiController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\VisitorApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,7 +259,16 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\ask.jpg" />
+    <Content Include="Content\Images\corazon.png" />
     <Content Include="Content\Images\defaultAvatar.png" />
+    <Content Include="Content\Images\hak.png" />
+    <Content Include="Content\Images\katt.jpg" />
+    <Content Include="Content\Images\light.jpg" />
+    <Content Include="Content\Images\pickadoller.jpg" />
+    <Content Include="Content\Images\random.png" />
+    <Content Include="Content\Images\smugOkuu.png" />
+    <Content Include="Content\Images\stagg.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -383,14 +393,14 @@
     <Content Include="Views\Profile\_Friends.cshtml" />
     <Content Include="Views\Notifications\_NoNotifications.cshtml" />
     <Content Include="Views\Notifications\_Notifications.cshtml" />
+    <Content Include="Views\Friend\_FriendCategoriesEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ExportedProfiles\" />
-    <Folder Include="Views\AjaxApi\" />
-    <Folder Include="Views\Friend\" />
     <Folder Include="Views\PostApi\" />
     <Folder Include="Views\Post\" />
+    <Folder Include="Views\VisitorApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

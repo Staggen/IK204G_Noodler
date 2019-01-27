@@ -3,7 +3,7 @@
 @using DataLayer.Repositories
 @if (Request.IsAuthenticated) {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
-        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken();
         string userId = User.Identity.GetUserId();
         ApplicationDbContext context = new ApplicationDbContext();
         ProfileRepository profiles = new ProfileRepository(context);
@@ -14,7 +14,6 @@
         } else {
             name = User.Identity.Name;
         }
-
         
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">

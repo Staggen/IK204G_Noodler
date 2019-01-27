@@ -4,6 +4,10 @@
 <h1>Friends</h1>
 @if (Model.UserId.Equals(User.Identity.GetUserId())) {
     <div>
+        <!-- Here goes the pop up div for the friend category selection -->
+        <div id="FriendCategoryPopUpDiv" class="d-none bg-secondary text-white">
+
+        </div>
         @foreach (var friend in Model.FriendList) {
             string FriendId = friend.Friend.Id;
             string FirstName = friend.Friend.FirstName;
@@ -20,10 +24,14 @@
                         </a>
                         <div class="media-body">
                             <button type="button" class="close" data-toggle="modal" data-target="@HashTargetId">&times;</button>
-                            <button type="button" class="close" data-id="@FriendId">&clubs;</button>
+                            
                         </div>
                     </div>
                 </div>
+                <footer class="card-footer">
+                    <strong>Category: </strong>@friend.FriendCategory.CategoryName
+                    <button type="button" class="close friendCategoryBtn" data-id="@FriendId">&equiv;</button>
+                </footer>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="@TargetId" tabindex="-1" role="dialog">

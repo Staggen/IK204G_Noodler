@@ -76,9 +76,6 @@ namespace NoodlerMVC.Controllers {
         }
 
         public ActionResult Create() {
-            var model = new ProfileModels {
-
-            };
             return View();
         }
 
@@ -98,7 +95,7 @@ namespace NoodlerMVC.Controllers {
                     }
                 }
 
-                var userId = User.Identity.GetUserId();
+                string userId = User.Identity.GetUserId();
                 profile.Id = userId;
                 profile.ProfileImage = imageData;
                 profileRepository.Add(profile);
@@ -207,13 +204,15 @@ namespace NoodlerMVC.Controllers {
             foreach (FriendModels friend in friends) {
                 if (!friend.UserId.Equals(userId)) {
                     list.Add(new FriendViewModels {
-                        RelationId = friend.Id,
-                        Friend = profileRepository.Get(friend.UserId)
+                        FriendshipRelationId = friend.Id,
+                        Friend = profileRepository.Get(friend.UserId),
+                        FriendCategory = friend.Category
                     });
                 } else {
                     list.Add(new FriendViewModels {
-                        RelationId = friend.Id,
-                        Friend = profileRepository.Get(friend.FriendId)
+                        FriendshipRelationId = friend.Id,
+                        Friend = profileRepository.Get(friend.FriendId),
+                        FriendCategory = friend.Category
                     });
                 }
             }

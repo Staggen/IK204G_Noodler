@@ -13,12 +13,12 @@ namespace DataLayer.Models {
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You need to have a first name.")]
-        [StringLength(25, MinimumLength = 2, ErrorMessage = "Your first name must be at least 2 characters long.")]
+        [StringLength(25, MinimumLength = 1, ErrorMessage = "Your first name must be at least 1 character long.")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "You need to have a last name.")]
-        [StringLength(25, MinimumLength = 2, ErrorMessage = "Your last name must be at least 2 characters long.")]
+        [StringLength(25, MinimumLength = 1, ErrorMessage = "Your last name must be at least 1 character long.")]
         public string LastName { get; set; }
 
         [StringLength(300, ErrorMessage = "Your biography may only be 300 characters long.")]

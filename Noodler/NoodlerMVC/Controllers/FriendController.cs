@@ -1,6 +1,7 @@
 ﻿using DataLayer.Models;
 using DataLayer.Repositories;
 using Microsoft.AspNet.Identity;
+using NoodlerMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -10,12 +11,28 @@ namespace NoodlerMVC.Controllers {
         private ProfileRepository profileRepository;
         private FriendRepository friendRepository;
         private RequestRepository requestRepository;
+        private FriendCategoryRepository friendCategoryRepository;
 
         public FriendController() {
             ApplicationDbContext context = new ApplicationDbContext();
             profileRepository = new ProfileRepository(context);
             friendRepository = new FriendRepository(context);
             requestRepository = new RequestRepository(context);
+            friendCategoryRepository = new FriendCategoryRepository(context);
+        }
+
+        public PartialViewResult LoadFriendCategoryDiv(string Id) {
+            int relationId = friendRepository.GetFriendshipIdByCurrentUserIdAndUserId(User.Identity.GetUserId(), Id);
+
+            FriendModels Friend = friendRepository.Get(relationId);
+            List<FriendCategoryModels> FriendCategories = friendCategoryRepository.GetAll();
+
+            FriendCategoryViewModels model = new FriendCategoryViewModels {
+                ActiveCategory = Friend.Category.CategoryName,
+                FriendCategories = FriendCategories
+            };
+
+            return PartialView("_FriendCategoriesEditor", model);
         }
 
         [HttpPost]
@@ -32,7 +49,8 @@ namespace NoodlerMVC.Controllers {
                         requestRepository.Save(); // Save new state
                         friendRepository.Add(new FriendModels {
                             UserId = profile.Id,
-                            FriendId = currentUserId
+                            FriendId = currentUserId,
+                            FriendCategory = 1
                         });
                         friendRepository.Save();
                         return Json(new { Result = true });
