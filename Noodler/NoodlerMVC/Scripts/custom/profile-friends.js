@@ -2,12 +2,15 @@
     console.log("Script loaded: profile-friends.js");
 });
 
-$("#FriendCategoryDropdownList").click(ShowFriendCategoryList); // Tried a lot of things, this thing refuses to register click events :(
-$("#FriendCategoryPopUpDiv").on("click", "#FriendCategoryAddBtn", AddFriendCategory);
-$("#FriendCategoryPopUpDiv").on("click", "#FriendCategorySaveBtn", SaveFriendCategory);
-$("#FriendCategoryPopUpDiv").on("click", "#FriendCategoryDeleteBtn", DeleteFriendCategory);
+$("#FriendListDiv").on("click", ".friendListCategory", SelectDropdownItem); // Dropdown item
+$("#FriendListDiv").on("click", "#InputFriendCategory", ShowFriendCategoryList); // Dropdown list
+$("#FriendListDiv").on("mouseleave", "#FriendCategoryDropdownList", ShowFriendCategoryList); // Leave dropdown list
+$("#FriendListDiv").on("click", "#FriendCategoryAddBtn", AddFriendCategory);
+$("#FriendListDiv").on("click", "#FriendCategorySaveBtn", SaveFriendCategory);
+$("#FriendListDiv").on("click", "#FriendCategoryDeleteBtn", DeleteFriendCategory);
 $("#FriendListDiv").on("click", ".removeFriendBtn", RemoveFriend);
-$("#FriendListDiv").on("click", ".friendCategoryBtn", ShowFriendCategoryDiv);
+$("#FriendListDiv").on("click", ".friendCategoryBtn", ShowFriendCategoryDiv); // Friend category div
+
 
 function RemoveFriend() {
     var Id = this.getAttribute("data-friend-id");
@@ -49,7 +52,7 @@ function ShowFriendCategoryDiv() {
     ToggleFriendCategoryPopUpDivDisplay();
     var ref = this;
     var pop = $("#FriendCategoryPopUpDiv");
-    var friendId = this.getAttribute("data-id");
+    var friendId = this.getAttribute("data-friend-id");
     var serviceUrl = "/Friend/LoadFriendCategoryDiv/" + friendId;
     var request = $.post(serviceUrl);
     request.done(function (data) {
@@ -68,27 +71,87 @@ function ShowFriendCategoryDiv() {
     });
 }
 
-function ShowFriendCategoryList() { // This doesn't even half-way register at all?!
+function ShowFriendCategoryList() {
     $("#FriendCategoryDropdownList").toggleClass("d-none");
     ref = $("#InputFriendCategory");
     pop = $("#FriendCategoryDropdownList");
     new Popper(ref, pop, {
         placement: 'bottom'
     });
-    console.log("Trigger");
+}
+
+function SelectDropdownItem() {
+    var FriendCategoryName = this.childNodes[0].data;
+    var FriendshipId = this.getAttribute("data-friendship-id");
+    var CategoryId = this.getAttribute("data-category-id");
+    $("#InputFriendCategory").val(FriendCategoryName);
+    SetFriendCategory(FriendshipId, CategoryId);
 }
 
 function AddFriendCategory() {
-    console.log("AddFriendCategory"); // Debugging purposes
-    // Functionality
+    var category = { CategoryName: $("#InputFriendCategory").val() };
+    $.ajax({
+        url: "/api/CategoryApi/Add/" + category,
+        type: "POST",
+        data: JSON.stringify(category),
+        contentType: "application/json;charset=UTF-8",
+        success: () => {
+            Update_Friends();
+            console.log("AddFriendCategory() => Success");
+        },
+        error: () => {
+            console.log("Error: Unable to add friend category.");
+        }
+    });
 }
 
 function SaveFriendCategory() {
-    console.log("SaveFriendCategory"); // Debugging purposes
-    // Functionality
+    var category = { Id: $("#InputFriendCategory").attr("data-category-id"), CategoryName: $("#InputFriendCategory").val() };
+    $.ajax({
+        url: "/api/CategoryApi/Edit/" + category,
+        type: "POST",
+        data: JSON.stringify(category),
+        contentType: "application/json;charset=UTF-8",
+        success: () => {
+            Update_Friends();
+            console.log("SaveFriendCategory() => Success");
+        },
+        error: () => {
+            console.log("Error: Unable to edit friend category.");
+        }
+    });
 }
 
 function DeleteFriendCategory() {
-    console.log("DeleteFriendCategory"); // Debugging purposes
-    // Functionality
+    var categoryId = $("#InputFriendCategory").attr("data-category-id");
+
+    $.ajax({
+        url: "/api/CategoryApi/Delete/" + categoryId,
+        type: "DELETE",
+        contentType: "application/json;charset=UTF-8",
+        success: () => {
+            Update_Friends();
+            console.log("DeleteFriendCategory() => Success");
+        },
+        error: () => {
+            console.log("Error: Failure to delete friend category");
+        }
+    });
+}
+
+function SetFriendCategory(Id, FriendCategory) {
+    var model = { Id: Id, FriendCategory: FriendCategory };
+    $.ajax({
+        url: "/Friend/SetFriendCategory/" + model,
+        type: "POST",
+        data: JSON.stringify(model),
+        contentType: "application/json;charset=UTF-8",
+        success: () => {
+            console.log("SetFriendCategory() => Success");
+            Update_Friends();
+        },
+        error: () => {
+            console.log("Error: Unable to set friend category.");
+        }
+    });
 }

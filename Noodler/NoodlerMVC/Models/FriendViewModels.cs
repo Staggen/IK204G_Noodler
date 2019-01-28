@@ -12,7 +12,9 @@ namespace NoodlerMVC.Models {
         public List<FriendViewModels> FriendList { get; set; }
     }
     public class FriendCategoryViewModels {
-        public string ActiveCategory { get; set; }
+        public int FriendshipRelationId { get; set; }
+        public string FriendId { get; set; }
+        public FriendCategoryModels ActiveCategory { get; set; }
         public List<FriendCategoryModels> FriendCategories { get; set; }
     }
 }

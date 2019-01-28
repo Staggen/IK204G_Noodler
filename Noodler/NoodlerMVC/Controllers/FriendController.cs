@@ -21,6 +21,14 @@ namespace NoodlerMVC.Controllers {
             friendCategoryRepository = new FriendCategoryRepository(context);
         }
 
+        [HttpPost]
+        public void SetFriendCategory(FriendModels vessel) {
+            FriendModels model = friendRepository.Get(vessel.Id);
+            model.FriendCategory = vessel.FriendCategory;
+            friendRepository.Edit(model);
+            friendRepository.Save();
+        }
+
         public PartialViewResult LoadFriendCategoryDiv(string Id) {
             int relationId = friendRepository.GetFriendshipIdByCurrentUserIdAndUserId(User.Identity.GetUserId(), Id);
 
@@ -28,8 +36,10 @@ namespace NoodlerMVC.Controllers {
             List<FriendCategoryModels> FriendCategories = friendCategoryRepository.GetAll();
 
             FriendCategoryViewModels model = new FriendCategoryViewModels {
-                ActiveCategory = Friend.Category.CategoryName,
-                FriendCategories = FriendCategories
+                FriendshipRelationId = relationId,
+                ActiveCategory = Friend.Category,
+                FriendCategories = FriendCategories,
+                FriendId = Id
             };
 
             return PartialView("_FriendCategoriesEditor", model);

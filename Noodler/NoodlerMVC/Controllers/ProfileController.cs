@@ -98,6 +98,7 @@ namespace NoodlerMVC.Controllers {
                 string userId = User.Identity.GetUserId();
                 profile.Id = userId;
                 profile.ProfileImage = imageData;
+                profile.IsActive = true;
                 profileRepository.Add(profile);
                 profileRepository.Save();
                 return RedirectToAction("Index");

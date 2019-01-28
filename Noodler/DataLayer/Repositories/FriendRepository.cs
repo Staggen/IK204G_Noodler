@@ -10,6 +10,10 @@ namespace DataLayer.Repositories {
             return items.Where((f) => f.UserId.Equals(userId) || f.FriendId.Equals(userId) && f.Friend.IsActive && f.User.IsActive).ToList();
         }
 
+        public List<FriendModels> GetAllFriendsByFriendCategoryId(int categoryId) {
+            return items.Where((x) => x.FriendCategory == categoryId).ToList();
+        }
+
         public int GetFriendshipIdByCurrentUserIdAndUserId(string currentUserId, string userId) {
             return items.First((x) => x.UserId.Equals(currentUserId) && x.FriendId.Equals(userId) || x.FriendId.Equals(currentUserId) && x.UserId.Equals(userId)).Id;
         }

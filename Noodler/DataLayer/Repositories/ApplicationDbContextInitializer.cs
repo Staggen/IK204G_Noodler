@@ -324,7 +324,7 @@ namespace DataLayer.Repositories {
                 CategoryName = "Acquaintances"
             };
             FriendCategoryModels category3 = new FriendCategoryModels {
-                CategoryName = "Best Friends Forever"
+                CategoryName = "BFFs"
             };
 
             context.Profiles.AddRange(new[] { eliasP, nicoP, oskarP, randomP, corazonP, andreasP, mathiasP, lightP, hakP, alfonsP }); // Add profiles

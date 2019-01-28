@@ -5,7 +5,7 @@
 @if (Model.UserId.Equals(User.Identity.GetUserId())) {
     <div>
         <!-- Here goes the pop up div for the friend category selection -->
-        <div id="FriendCategoryPopUpDiv" class="d-none bg-secondary text-white" style="z-index: 1;">
+        <div id="FriendCategoryPopUpDiv" class="d-none bg-secondary text-light rounded" style="z-index: 1;">
 
         </div>
         @foreach (var friend in Model.FriendList) {
@@ -30,7 +30,7 @@
                 </div>
                 <footer class="card-footer">
                     <strong>Category: </strong>@friend.FriendCategory.CategoryName
-                    <button type="button" class="close friendCategoryBtn" data-id="@FriendId">&equiv;</button>
+                    <button type="button" class="close friendCategoryBtn" data-friend-id="@FriendId">&equiv;</button>
                 </footer>
             </div>
             <!-- Modal -->
