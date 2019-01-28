@@ -2,8 +2,10 @@
     console.log("Script loaded: profile-friends.js");
 });
 
-// ADD FUNCTIONALITY FOR THE DAMN BUTTONS IN THE FRIEND CATEGORY POPUP DIV, plus you might wish to style them a touch as well...
-
+$("#FriendCategoryDropdownList").click(ShowFriendCategoryList); // Tried a lot of things, this thing refuses to register click events :(
+$("#FriendCategoryPopUpDiv").on("click", "#FriendCategoryAddBtn", AddFriendCategory);
+$("#FriendCategoryPopUpDiv").on("click", "#FriendCategorySaveBtn", SaveFriendCategory);
+$("#FriendCategoryPopUpDiv").on("click", "#FriendCategoryDeleteBtn", DeleteFriendCategory);
 $("#FriendListDiv").on("click", ".removeFriendBtn", RemoveFriend);
 $("#FriendListDiv").on("click", ".friendCategoryBtn", ShowFriendCategoryDiv);
 
@@ -64,4 +66,29 @@ function ShowFriendCategoryDiv() {
     }).fail(() => {
         console.log("Error: Failure to load popup window");
     });
+}
+
+function ShowFriendCategoryList() { // This doesn't even half-way register at all?!
+    $("#FriendCategoryDropdownList").toggleClass("d-none");
+    ref = $("#InputFriendCategory");
+    pop = $("#FriendCategoryDropdownList");
+    new Popper(ref, pop, {
+        placement: 'bottom'
+    });
+    console.log("Trigger");
+}
+
+function AddFriendCategory() {
+    console.log("AddFriendCategory"); // Debugging purposes
+    // Functionality
+}
+
+function SaveFriendCategory() {
+    console.log("SaveFriendCategory"); // Debugging purposes
+    // Functionality
+}
+
+function DeleteFriendCategory() {
+    console.log("DeleteFriendCategory"); // Debugging purposes
+    // Functionality
 }

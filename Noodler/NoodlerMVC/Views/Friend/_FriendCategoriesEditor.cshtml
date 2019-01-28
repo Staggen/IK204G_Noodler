@@ -1,14 +1,13 @@
 ﻿@model NoodlerMVC.Models.FriendCategoryViewModels
 
 <div>
-    <button class="btn btn-primary dropdown-toggle friendCategoryDropdownBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.ActiveCategory</button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        @foreach(var item in Model.FriendCategories) {
-            <a class="dropdown-item" data-id="@item.Id" href="#">@item.CategoryName</a>
-        }
-    </div>
-    <input type="text" class="form-control" />
     <button type="button" class="btn btn-success" id="FriendCategoryAddBtn">Add</button>
     <button type="button" class="btn btn-info" id="FriendCategorySaveBtn">Save</button>
     <button type="button" class="btn btn-danger" id="FriendCategoryDeleteBtn">Delete</button>
+    <input type="text" class="form-control dropdown-toggle" id="InputFriendCategory" value="@Model.ActiveCategory" />
+    <div class="d-none" id="FriendCategoryDropdownList">
+        @foreach (var item in Model.FriendCategories) {
+            <a class="dropdown-item" data-id="@item.Id" href="#">@item.CategoryName</a>
+        }
+    </div>
 </div>

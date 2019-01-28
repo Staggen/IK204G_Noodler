@@ -5,7 +5,7 @@
 @if (Model.UserId.Equals(User.Identity.GetUserId())) {
     <div>
         <!-- Here goes the pop up div for the friend category selection -->
-        <div id="FriendCategoryPopUpDiv" class="d-none bg-secondary text-white">
+        <div id="FriendCategoryPopUpDiv" class="d-none bg-secondary text-white" style="z-index: 1;">
 
         </div>
         @foreach (var friend in Model.FriendList) {

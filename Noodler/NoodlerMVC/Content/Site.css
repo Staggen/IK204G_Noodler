@@ -28,11 +28,7 @@ select {
 .changeProfileBtn,
 .manageAccountBtn,
 .exportToXmlBtn,
-.suspendAccountBtn,
-.friendCategoryDropdownBtn,
-#FriendCategoryAddBtn,
-#FriendCategorySaveBtn,
-#FriendCategoryDeleteBtn {
+.suspendAccountBtn {
     margin: 5px 1px 1px 1px;
 }
 #ProfileImage{
@@ -43,4 +39,10 @@ select {
 #NotificationPopUpDiv,
 #FriendCategoryPopUpDiv {
     padding: 10px;
+}
+
+#FriendCategoryAddBtn,
+#FriendCategorySaveBtn,
+#FriendCategoryDeleteBtn{
+    margin: 1px 1px 5px 1px;
 }
