@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Desperation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Desperation, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "desp", @name = "des" } })
+                @Html.EditorFor(model => model.Desperation, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "desp" } })
                 @Html.ValidationMessageFor(model => model.Desperation, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,7 +64,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Loneliness, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Loneliness, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "lone", @name = "lon" } })
+                @Html.EditorFor(model => model.Loneliness, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "lone" } })
                 @Html.ValidationMessageFor(model => model.Loneliness, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,7 +72,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Horniness, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Horniness, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "horny", @name = "hor" } })
+                @Html.EditorFor(model => model.Horniness, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "horny" } })
                 @Html.ValidationMessageFor(model => model.Horniness, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,13 +80,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Pride, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Pride, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "pride", @name = "pri" } })
+                @Html.EditorFor(model => model.Pride, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "1", @max = "11", @id = "pride" } })
                 @Html.ValidationMessageFor(model => model.Pride, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="offset-md-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>

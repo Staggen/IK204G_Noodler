@@ -86,9 +86,9 @@ namespace NoodlerMVC.Controllers {
             if (ModelState.IsValid) {
                 // Convert the uploaded photo to a byte array that we can store in the database.
                 byte[] imageData = null;
-                if (Request.Files.Count == 1) {
+                if (Request.Files[0].ContentLength >= 1) { // Check if a file is entered
                     HttpPostedFileBase poImgFile = Request.Files["ProfileImage"];
-
+                    
                     using (var binary = new BinaryReader(poImgFile.InputStream)) {
                         //This is the byte-array we set as the ProfileImage property on the profile.
                         imageData = binary.ReadBytes(poImgFile.ContentLength);

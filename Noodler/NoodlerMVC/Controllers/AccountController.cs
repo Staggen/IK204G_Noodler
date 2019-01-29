@@ -71,6 +71,9 @@ namespace NoodlerMVC.Controllers {
             switch (result) {
                 case SignInStatus.Success:
                     string currentUserId = userRepository.GetUserIdByEmail(model.Email);
+                    if (!profileRepository.IfProfileExists(currentUserId)) {
+                        return RedirectToAction("Create", "Profile"); // If user has no profile, they get to create one
+                    }
                     ProfileModels profile = profileRepository.Get(currentUserId);
                     if (!profile.IsActive) {
                         // If the user is not currently active, they are set to active upon successful login attempt.

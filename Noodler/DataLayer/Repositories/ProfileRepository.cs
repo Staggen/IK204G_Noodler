@@ -13,5 +13,11 @@ namespace DataLayer.Repositories {
         public List<ProfileModels> GetAllActiveProfiles() {
             return items.Where((p) => p.IsActive).ToList();
         }
+
+        public bool IfProfileExists(string userId) {
+            List<ProfileModels> profile = items.Where((p) => p.Id.Equals(userId)).ToList(); // Should only ever be 0 or 1
+            if (profile.Count == 1) return true;
+            else return false;
+        }
     }
 }
