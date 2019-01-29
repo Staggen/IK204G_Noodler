@@ -89,7 +89,6 @@
     <Compile Include="Repositories\FriendCategoryRepository.cs" />
     <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\IIdentifiable.cs" />
-    <Compile Include="Repositories\MatchDataRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
