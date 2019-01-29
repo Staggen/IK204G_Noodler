@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace NoodlerMVC.Controllers {
+    [Authorize]
     public class FriendController : Controller {
         private ProfileRepository profileRepository;
         private FriendRepository friendRepository;

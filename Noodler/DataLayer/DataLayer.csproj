@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Models\FriendCategoryModels.cs" />
     <Compile Include="Models\FriendModels.cs" />
+    <Compile Include="Models\MatchDataModels.cs" />
     <Compile Include="Models\ProfileModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PostModels.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Repositories\FriendCategoryRepository.cs" />
     <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\IIdentifiable.cs" />
+    <Compile Include="Repositories\MatchDataRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />

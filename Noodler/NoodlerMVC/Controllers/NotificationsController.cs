@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Mvc;
 
 namespace NoodlerMVC.Controllers {
+    [Authorize]
     public class NotificationsController : Controller
     {
         private RequestRepository requestRepository;

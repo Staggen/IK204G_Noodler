@@ -27,6 +27,7 @@ namespace DataLayer.Repositories {
         public DbSet<RequestModels> Requests { get; set; }
         public DbSet<ProfileModels> Profiles { get; set; }
         public DbSet<FriendCategoryModels> Categories { get; set; }
+        public DbSet<MatchDataModels> MatchData { get; set; }
 
         // End of DbSet(s)
     }

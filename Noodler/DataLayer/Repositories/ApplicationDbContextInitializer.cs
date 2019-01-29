@@ -149,7 +149,7 @@ namespace DataLayer.Repositories {
                 FirstName = "月",
                 LastName = "夜神",
                 Gender = Gender.Man,
-                Biography = "魚取り、ヌードリングする",
+                Biography = "を魚取り、ヌードリングする",
                 BirthDate = new DateTime(1996, 03, 22),
                 ProfileImage = setInitializerProfilePicture("/Content/Images/light.png")
             };
@@ -378,6 +378,81 @@ namespace DataLayer.Repositories {
 
             context.Friends.AddRange(new[] { friends1, friends2, friends3, friends4, friends5, friends6, friends7, friends8 }); // Add friendships
             context.SaveChanges(); // Save database once more to finally add the friends into the database.
+            context.Database.Connection.Open(); // Connection closes after SaveChanges() so we have to re-open it.
+
+            MatchDataModels nicoMd = new MatchDataModels {
+                Id = nicoP.Id,
+                Desperation = 9,
+                Loneliness = 10,
+                Horniness = 3,
+                Pride = 8
+            };
+            MatchDataModels eliasMd = new MatchDataModels {
+                Id = eliasP.Id,
+                Desperation = 10,
+                Loneliness = 10,
+                Horniness = 4,
+                Pride = 6
+            };
+            MatchDataModels oskarMd = new MatchDataModels {
+                Id = oskarP.Id,
+                Desperation = 9,
+                Loneliness = 10,
+                Horniness = 10,
+                Pride = 1
+            };
+            MatchDataModels randomMd = new MatchDataModels {
+                Id = randomP.Id,
+                Desperation = 5,
+                Loneliness = 6,
+                Horniness = 10,
+                Pride = 9,
+            };
+            MatchDataModels corazonMd = new MatchDataModels {
+                Id = corazonP.Id,
+                Desperation = 8,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 5
+            };
+            MatchDataModels andreasMd = new MatchDataModels {
+                Id = andreasP.Id,
+                Desperation = 10,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 3
+            };
+            MatchDataModels mathiasMd = new MatchDataModels {
+                Id = mathiasP.Id,
+                Desperation = 5,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 8
+            };
+            MatchDataModels lightMd = new MatchDataModels {
+                Id = lightP.Id,
+                Desperation = 3,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 10
+            };
+            MatchDataModels hakMd = new MatchDataModels {
+                Id = hakP.Id,
+                Desperation = 2,
+                Loneliness = 10,
+                Horniness = 8,
+                Pride = 10
+            };
+            MatchDataModels alfonsMd = new MatchDataModels {
+                Id = alfonsP.Id,
+                Desperation = 6,
+                Loneliness = 10,
+                Horniness = 4,
+                Pride = 10
+            };
+
+            context.MatchData.AddRange(new[] { nicoMd, eliasMd, oskarMd, randomMd, corazonMd, andreasMd, mathiasMd, lightMd, hakMd, alfonsMd }); // Add matchdata
+            context.SaveChanges(); // Save database once more to finally add the match data into the database.
         }
     }
 }
