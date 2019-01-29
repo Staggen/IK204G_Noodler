@@ -332,7 +332,7 @@ namespace DataLayer.Repositories {
             context.Requests.AddRange(new[] { request1, request2, request3, request4, request5, request6, request7, request8, request9, request10 }); // Add requests
             context.Categories.AddRange(new[] { category1, category2, category3 }); // Add friend categories
             context.SaveChanges(); // We need to save the friend categories into the database to be able to access their IDs for the creation of the friends.
-            context.Database.Connection.Open(); // Connection closes after SaveChanges() so we have to re-open it.
+            //context.Database.Connection.Open(); // Connection closes after SaveChanges() so we have to re-open it.
 
             // Define friendships
             FriendModels friends1 = new FriendModels {
@@ -378,7 +378,6 @@ namespace DataLayer.Repositories {
 
             context.Friends.AddRange(new[] { friends1, friends2, friends3, friends4, friends5, friends6, friends7, friends8 }); // Add friendships
             context.SaveChanges(); // Save database once more to finally add the friends into the database.
-            context.Database.Connection.Open(); // Connection closes after SaveChanges() so we have to re-open it.
 
             MatchDataModels nicoMd = new MatchDataModels {
                 Id = nicoP.Id,

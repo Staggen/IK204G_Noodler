@@ -79,7 +79,8 @@ function NotificationsAcceptRequest() {
             if (data.Result) {
                 ButtonGroupFriends();
                 Update_Friends();
-                Update_Content();
+                ShowNotificationsDiv();
+                ShowNotificationsDiv();
             }
             console.log("AcceptRequest() => Success");
         },
@@ -99,8 +100,9 @@ function NotificationsDeclineRequest() {
         dataType: "JSON",
         success: function (data) {
             if (data.Result) {
-                Update_Content();
                 ButtonGroupNotFriends();
+                ShowNotificationsDiv();
+                ShowNotificationsDiv();
             }
             console.log("DeclineRequest() => Success");
         },
