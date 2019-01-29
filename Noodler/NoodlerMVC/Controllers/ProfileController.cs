@@ -93,10 +93,16 @@ namespace NoodlerMVC.Controllers {
                         //This is the byte-array we set as the ProfileImage property on the profile.
                         imageData = binary.ReadBytes(poImgFile.ContentLength);
                     }
+                } else { // If they did not submit a profile image they get the default avatar
+                    string path = AppDomain.CurrentDomain.BaseDirectory + "/Content/Images/defaultAvatar.png";
+                    FileStream file = new FileStream(path, FileMode.Open);
+
+                    using (var binary = new BinaryReader(file)) {
+                        imageData = binary.ReadBytes((int)file.Length);
+                    }
                 }
 
-                string userId = User.Identity.GetUserId();
-                profile.Id = userId;
+                profile.Id = User.Identity.GetUserId();
                 profile.ProfileImage = imageData;
                 profile.IsActive = true;
                 profileRepository.Add(profile);

@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-success" id="FriendCategoryAddBtn">Add</button>
     <button type="button" class="btn btn-info" id="FriendCategorySaveBtn">Save</button>
     <button type="button" class="btn btn-danger" id="FriendCategoryDeleteBtn">Delete</button>
-
+    <!-- Yes, data-category-id is required in more places than one. No, we are not retarded. -->
     <input type="text" class="form-control dropdown-toggle" id="InputFriendCategory" data-category-id="@Model.ActiveCategory.Id" value="@Model.ActiveCategory.CategoryName" />
 
     <div class="d-none bg-light list-group" id="FriendCategoryDropdownList">

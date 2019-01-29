@@ -11,8 +11,8 @@ namespace DataLayer.Repositories {
             base.Seed(context);
             SeedUsers(context);
         }
-        public static byte[] setInitializerProfilePicture(string endPath) {
 
+        public static byte[] setInitializerProfilePicture(string endPath) {
             // Setting default avatar for all profiles
             string path = AppDomain.CurrentDomain.BaseDirectory + endPath;
             FileStream file = new FileStream(path, FileMode.Open);
@@ -22,6 +22,7 @@ namespace DataLayer.Repositories {
             }
             return avatar;
         }
+
         public static void SeedUsers(ApplicationDbContext context) {
             // Create the users
             UserStore<ApplicationUser> store = new UserStore<ApplicationUser>(context);
@@ -302,6 +303,12 @@ namespace DataLayer.Repositories {
                 PostDateTime = new DateTime(2019, 01, 25, 10, 41, 52),
                 Text = "Har svårt att stå emot en sådan lockande inbjudan! Hänger med på studs."
             };
+            PostModels post16 = new PostModels {
+                PostFromId = alfonsU.Id,
+                PostToId = andreasU.Id,
+                PostDateTime = new DateTime(2019, 02, 14, 06, 37, 09),
+                Text = "Eyy, Andy! Ska du med och baxa braj?"
+            };
 
             // Define requests
             RequestModels request1 = new RequestModels {
@@ -366,8 +373,86 @@ namespace DataLayer.Repositories {
                 CategoryName = "BFFs"
             };
 
+            // Define Visits
+            VisitorModels eliasV1 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 01, 25, 10, 41, 52),
+                VisitFromId = nicoU.Id,
+                VisitToId = eliasU.Id
+            };
+            VisitorModels eliasV2 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 05, 15, 12, 54, 8),
+                VisitFromId = oskarU.Id,
+                VisitToId = eliasU.Id
+            };
+            VisitorModels eliasV3 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 05, 04, 22, 21, 54),
+                VisitFromId = andreasU.Id,
+                VisitToId = eliasU.Id
+            };
+            VisitorModels eliasV4 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 02, 21, 23, 15, 12),
+                VisitFromId = lightU.Id,
+                VisitToId = eliasU.Id
+            };
+            VisitorModels eliasV5 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 05, 25, 13, 41, 45),
+                VisitFromId = randomU.Id,
+                VisitToId = eliasU.Id
+            };
+            VisitorModels nicoV1 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 05, 25, 13, 41, 45),
+                VisitFromId = randomU.Id,
+                VisitToId = nicoU.Id
+            };
+            VisitorModels nicoV2 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 07, 30, 20, 35, 26),
+                VisitFromId = andreasU.Id,
+                VisitToId = nicoU.Id
+            };
+            VisitorModels nicoV3 = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 08, 25, 14, 37, 55),
+                VisitFromId = lightU.Id,
+                VisitToId = nicoU.Id
+            };
+            VisitorModels oskarV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 09, 26, 15, 38, 56),
+                VisitFromId = andreasU.Id,
+                VisitToId = oskarU.Id
+            };
+            VisitorModels lightV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 05, 24, 19, 48, 26),
+                VisitFromId = andreasU.Id,
+                VisitToId = lightU.Id
+            };
+            VisitorModels mathiasV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 06, 23, 18, 47, 41),
+                VisitFromId = andreasU.Id,
+                VisitToId = mathiasU.Id
+            };
+            VisitorModels randomV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 09, 12, 09, 37, 23),
+                VisitFromId = andreasU.Id,
+                VisitToId = randomU.Id
+            };
+            VisitorModels hakV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 03, 28, 10, 00, 00),
+                VisitFromId = andreasU.Id,
+                VisitToId = randomU.Id
+            };
+            VisitorModels andreasV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 04, 19, 14, 12, 35),
+                VisitFromId = alfonsU.Id,
+                VisitToId = randomU.Id
+            };
+            VisitorModels alfonsV = new VisitorModels {
+                VisitDateTime = new DateTime(2019, 08, 25, 14, 37, 55),
+                VisitFromId = andreasU.Id,
+                VisitToId = alfonsU.Id
+            };
+
+            context.Visitors.AddRange(new[] { eliasV1, eliasV2, eliasV3, eliasV4, eliasV5, nicoV1, nicoV2, nicoV3, oskarV, lightV, mathiasV, randomV, hakV, andreasV, alfonsV });
             context.Profiles.AddRange(new[] { eliasP, nicoP, oskarP, randomP, corazonP, andreasP, mathiasP, lightP, hakP, alfonsP }); // Add profiles
-            context.Posts.AddRange(new[] { post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15 }); // Add posts
+            context.Posts.AddRange(new[] { post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16 }); // Add posts
             context.Requests.AddRange(new[] { request1, request2, request3, request4, request5, request6, request7, request8, request9, request10 }); // Add requests
             context.Categories.AddRange(new[] { category1, category2, category3 }); // Add friend categories
             context.SaveChanges(); // We need to save the friend categories into the database to be able to access their IDs for the creation of the friends.
