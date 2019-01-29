@@ -35,7 +35,16 @@ namespace DataLayer.Models {
         [Display(Name = "Profile Image")]
         public byte[] ProfileImage { get; set; }
 
-        public bool IsActive { get; set; } = true; // If the account is active or has been closed, default = active
+        [Range(1, 11)]
+        public int Desperation { get; set; }
+        [Range(1, 11)]
+        public int Loneliness { get; set; }
+        [Range(1, 11)]
+        public int Horniness { get; set; }
+        [Range(1, 11)]
+        public int Pride { get; set; }
+
+        public bool IsActive { get; set; } = true; // If the account is active or has been closed, default: active (set when profile is created)
 
         // Add further things onto the model if necessary, possibly make a third model for matches rather than adding such data onto this one?
 

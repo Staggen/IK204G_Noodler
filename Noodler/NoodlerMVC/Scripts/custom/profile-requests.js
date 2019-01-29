@@ -79,8 +79,12 @@ function NotificationsAcceptRequest() {
             if (data.Result) {
                 ButtonGroupFriends();
                 Update_Friends();
-                ShowNotificationsDiv();
-                ShowNotificationsDiv();
+                if ($("#NotificationNumberSpan").val() == 0) {
+                    ToggleNotificationPopUpDivDisplay();
+                } else {
+                    ShowNotificationsDiv();
+                    ShowNotificationsDiv();
+                }
             }
             console.log("AcceptRequest() => Success");
         },
@@ -101,8 +105,12 @@ function NotificationsDeclineRequest() {
         success: function (data) {
             if (data.Result) {
                 ButtonGroupNotFriends();
-                ShowNotificationsDiv();
-                ShowNotificationsDiv();
+                if ($("#NotificationNumberSpan").val() == 0) {
+                    ToggleNotificationPopUpDivDisplay();
+                } else {
+                    ShowNotificationsDiv();
+                    ShowNotificationsDiv();
+                }
             }
             console.log("DeclineRequest() => Success");
         },

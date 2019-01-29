@@ -107,9 +107,7 @@ namespace NoodlerMVC.Controllers {
         }
 
         public ActionResult Manage() {
-            var userId = User.Identity.GetUserId();
-            var userProfile = profileRepository.Get(userId);
-            return View(userProfile);
+            return View(profileRepository.Get(User.Identity.GetUserId())); // Get profile for current user
         }
 
         [HttpPost]

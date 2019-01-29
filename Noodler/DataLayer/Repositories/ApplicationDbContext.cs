@@ -14,8 +14,8 @@ namespace DataLayer.Repositories {
             return new ApplicationDbContext();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder) { // What is this? - Figure out
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>(); // Enable cascade delete when you remove something that requires it.
             base.OnModelCreating(modelBuilder);
         }
 
@@ -27,7 +27,6 @@ namespace DataLayer.Repositories {
         public DbSet<RequestModels> Requests { get; set; }
         public DbSet<ProfileModels> Profiles { get; set; }
         public DbSet<FriendCategoryModels> Categories { get; set; }
-        public DbSet<MatchDataModels> MatchData { get; set; }
 
         // End of DbSet(s)
     }

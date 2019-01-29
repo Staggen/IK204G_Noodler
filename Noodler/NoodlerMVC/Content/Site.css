@@ -37,7 +37,8 @@ select {
 }
 
 #NotificationPopUpDiv,
-#FriendCategoryPopUpDiv {
+#FriendCategoryPopUpDiv,
+#MatchPopUpDiv {
     padding: 10px;
 }
 
@@ -45,4 +46,9 @@ select {
 #FriendCategorySaveBtn,
 #FriendCategoryDeleteBtn{
     margin: 1px 1px 5px 1px;
+}
+
+.matchPercentageSpan{
+    font-size: 24px;
+    padding: 5px;
 }

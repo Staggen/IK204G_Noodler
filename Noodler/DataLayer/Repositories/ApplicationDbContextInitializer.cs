@@ -78,8 +78,7 @@ namespace DataLayer.Repositories {
             };
             manager.Create(alfonsU, "password");
 
-
-
+            
             // Define Profiles
             ProfileModels eliasP = new ProfileModels {
                 Id = eliasU.Id,
@@ -88,6 +87,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "This is an example biography of the profile for Elias Stagg.",
                 BirthDate = new DateTime(1998, 04, 22),
+                Desperation = 10,
+                Loneliness = 10,
+                Horniness = 4,
+                Pride = 6,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/stagg.jpg")
             };
             ProfileModels nicoP = new ProfileModels {
@@ -97,6 +100,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "This is an example biography of the profile for Nicolas Björkefors.",
                 BirthDate = new DateTime(1998, 01, 05),
+                Desperation = 9,
+                Loneliness = 10,
+                Horniness = 3,
+                Pride = 8,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/smugOkuu.png")
             };
             ProfileModels oskarP = new ProfileModels {
@@ -106,6 +113,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "This is an example biography of the profile for Oskar Olofsson.",
                 BirthDate = new DateTime(1982, 09, 15),
+                Desperation = 9,
+                Loneliness = 10,
+                Horniness = 10,
+                Pride = 1,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/pickadoller.jpg")
             };
             ProfileModels randomP = new ProfileModels {
@@ -115,6 +126,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Attackhelicopter,
                 Biography = "This is an example biography of the profile for Random Svensson.",
                 BirthDate = new DateTime(1980, 08, 14),
+                Desperation = 5,
+                Loneliness = 6,
+                Horniness = 10,
+                Pride = 9,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/random.png")
             };
             ProfileModels corazonP = new ProfileModels {
@@ -124,6 +139,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "Este es un ejemplo de biografía del perfil de Corazon D'amico.",
                 BirthDate = new DateTime(1971, 07, 15),
+                Desperation = 10,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 3,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/corazon.png")
             };
             ProfileModels andreasP = new ProfileModels {
@@ -133,6 +152,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "Ja, nu har du hittat min profil. Diskutera vad detta innebär sakligt i par eller nåt. Och förresten har någon sett min fez?",
                 BirthDate = new DateTime(1900, 01, 25),
+                Desperation = 8,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 5,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/ask.jpg")
             };
             ProfileModels mathiasP = new ProfileModels {
@@ -142,6 +165,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "Jag har en katt, och katten. Har flera katter. Mitt hem är praktiskt taget ett katthem.",
                 BirthDate = new DateTime(1900, 05, 11),
+                Desperation = 5,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 8,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/katt.jpg")
             };
             ProfileModels lightP = new ProfileModels {
@@ -151,6 +178,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "を魚取り、ヌードリングする",
                 BirthDate = new DateTime(1996, 03, 22),
+                Desperation = 3,
+                Loneliness = 10,
+                Horniness = 7,
+                Pride = 10,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/light.png")
             };
             ProfileModels hakP = new ProfileModels {
@@ -160,6 +191,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "Don't come near me or the princess. I'll kill you.",
                 BirthDate = new DateTime(1982, 09, 29),
+                Desperation = 2,
+                Loneliness = 10,
+                Horniness = 8,
+                Pride = 10,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/hak.png")
             };
             ProfileModels alfonsP = new ProfileModels {
@@ -169,6 +204,10 @@ namespace DataLayer.Repositories {
                 Gender = Gender.Man,
                 Biography = "Någon som vill med på brajbaxningsäventyr?",
                 BirthDate = new DateTime(2002, 12, 11),
+                Desperation = 6,
+                Loneliness = 10,
+                Horniness = 4,
+                Pride = 10,
                 ProfileImage = setInitializerProfilePicture("/Content/Images/braj.png")
             };
 
@@ -332,7 +371,6 @@ namespace DataLayer.Repositories {
             context.Requests.AddRange(new[] { request1, request2, request3, request4, request5, request6, request7, request8, request9, request10 }); // Add requests
             context.Categories.AddRange(new[] { category1, category2, category3 }); // Add friend categories
             context.SaveChanges(); // We need to save the friend categories into the database to be able to access their IDs for the creation of the friends.
-            //context.Database.Connection.Open(); // Connection closes after SaveChanges() so we have to re-open it.
 
             // Define friendships
             FriendModels friends1 = new FriendModels {
@@ -377,81 +415,7 @@ namespace DataLayer.Repositories {
             };
 
             context.Friends.AddRange(new[] { friends1, friends2, friends3, friends4, friends5, friends6, friends7, friends8 }); // Add friendships
-            context.SaveChanges(); // Save database once more to finally add the friends into the database.
-
-            MatchDataModels nicoMd = new MatchDataModels {
-                Id = nicoP.Id,
-                Desperation = 9,
-                Loneliness = 10,
-                Horniness = 3,
-                Pride = 8
-            };
-            MatchDataModels eliasMd = new MatchDataModels {
-                Id = eliasP.Id,
-                Desperation = 10,
-                Loneliness = 10,
-                Horniness = 4,
-                Pride = 6
-            };
-            MatchDataModels oskarMd = new MatchDataModels {
-                Id = oskarP.Id,
-                Desperation = 9,
-                Loneliness = 10,
-                Horniness = 10,
-                Pride = 1
-            };
-            MatchDataModels randomMd = new MatchDataModels {
-                Id = randomP.Id,
-                Desperation = 5,
-                Loneliness = 6,
-                Horniness = 10,
-                Pride = 9,
-            };
-            MatchDataModels corazonMd = new MatchDataModels {
-                Id = corazonP.Id,
-                Desperation = 8,
-                Loneliness = 10,
-                Horniness = 7,
-                Pride = 5
-            };
-            MatchDataModels andreasMd = new MatchDataModels {
-                Id = andreasP.Id,
-                Desperation = 10,
-                Loneliness = 10,
-                Horniness = 7,
-                Pride = 3
-            };
-            MatchDataModels mathiasMd = new MatchDataModels {
-                Id = mathiasP.Id,
-                Desperation = 5,
-                Loneliness = 10,
-                Horniness = 7,
-                Pride = 8
-            };
-            MatchDataModels lightMd = new MatchDataModels {
-                Id = lightP.Id,
-                Desperation = 3,
-                Loneliness = 10,
-                Horniness = 7,
-                Pride = 10
-            };
-            MatchDataModels hakMd = new MatchDataModels {
-                Id = hakP.Id,
-                Desperation = 2,
-                Loneliness = 10,
-                Horniness = 8,
-                Pride = 10
-            };
-            MatchDataModels alfonsMd = new MatchDataModels {
-                Id = alfonsP.Id,
-                Desperation = 6,
-                Loneliness = 10,
-                Horniness = 4,
-                Pride = 10
-            };
-
-            context.MatchData.AddRange(new[] { nicoMd, eliasMd, oskarMd, randomMd, corazonMd, andreasMd, mathiasMd, lightMd, hakMd, alfonsMd }); // Add matchdata
-            context.SaveChanges(); // Save database once more to finally add the match data into the database.
+            context.SaveChanges();
         }
     }
 }

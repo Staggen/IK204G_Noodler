@@ -96,6 +96,12 @@
             </div>
         }
         <hr />
+        @if (Request.IsAuthenticated && !currentUserId.Equals(Model.Id)) {
+            <button type="button" class="btn btn-info" id="DoWeMatchBtn">Do We Match?</button>
+            <div class="d-none bg-success text-light rounded" id="MatchPopUpDiv">
+
+            </div>
+        }
         @if (Request.IsAuthenticated && currentUserId.Equals(Model.Id)) {
             <div>
                 <h1>Latest Visitors</h1>
@@ -120,5 +126,8 @@
     <script src="~/Scripts/custom/profile-friends.js"></script>
     @if (Request.IsAuthenticated && currentUserId.Equals(Model.Id)) {
         <script src="~/Scripts/custom/profile-visitors.js"></script>
+    }
+    @if (Request.IsAuthenticated && !currentUserId.Equals(Model.Id)) {
+        <script src="~/Scripts/custom/profile-match.js"></script>
     }
 }
