@@ -22,5 +22,5 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Back to Profile", "Index", "Profile", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-info" })
+    <a href="@Url.Action("Index", "Profile", new { id = User.Identity.GetUserId() })" class="btn btn-info">Back to Profile</a>
 </div>

@@ -160,3 +160,30 @@ D:\Storage\GitHub Repos\Noodler\Noodler\DataLayer\obj\Debug\DataLayer.csproj.Cor
 D:\Storage\GitHub Repos\Noodler\Noodler\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
 D:\Storage\GitHub Repos\Noodler\Noodler\DataLayer\obj\Debug\DataLayer.dll
 D:\Storage\GitHub Repos\Noodler\Noodler\DataLayer\obj\Debug\DataLayer.pdb
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Owin.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Owin.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Owin.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\obj\Debug\DataLayer.csprojAssemblyReference.cache
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\elias\Documents\GitHub\IK204_Noodler\Noodler\DataLayer\obj\Debug\DataLayer.pdb

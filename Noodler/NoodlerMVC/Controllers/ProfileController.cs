@@ -32,7 +32,7 @@ namespace NoodlerMVC.Controllers {
         public ActionResult Index() {
             object profileId = Request.RequestContext.RouteData.Values["id"];
             string currentUserId = User.Identity.GetUserId();
-            if (profileId == null) {
+            if (string.IsNullOrWhiteSpace((string)profileId)) {
                 profileId = currentUserId;
             }
 
@@ -86,7 +86,7 @@ namespace NoodlerMVC.Controllers {
             if (ModelState.IsValid) {
                 // Convert the uploaded photo to a byte array that we can store in the database.
                 byte[] imageData = null;
-                if (Request.Files[0].ContentLength >= 1) { // Check if a file is entered
+                if (Request.Files["ProfileImage"].ContentLength >= 1) { // Check if a file is entered
                     HttpPostedFileBase poImgFile = Request.Files["ProfileImage"];
                     
                     using (var binary = new BinaryReader(poImgFile.InputStream)) {
@@ -127,7 +127,7 @@ namespace NoodlerMVC.Controllers {
 
                 //Possible new profile image input
                 byte[] imageData = null;
-                if (Request.Files.Count == 1) {
+                if (Request.Files["ProfileImage"].ContentLength >= 1) {
                     HttpPostedFileBase poImgFile = Request.Files["ProfileImage"];
 
                     using (var binary = new BinaryReader(poImgFile.InputStream)) {
@@ -135,8 +135,7 @@ namespace NoodlerMVC.Controllers {
                         imageData = binary.ReadBytes(poImgFile.ContentLength);
                     }
                 }
-
-                if (imageData != null && imageData.Length > 0) { // If there is a new file input
+                if (imageData != null) { // If there is a new file input
                     profile.ProfileImage = imageData;
                 } else { // If there is not a new file input
                     profile.ProfileImage = backupImageCopy; // To make sure "null" is not submitted into the database
@@ -179,7 +178,7 @@ namespace NoodlerMVC.Controllers {
             //Converts the stored byte-array to an image. This action is called with razor in views to be used in img tags.
             var profileId = Request.RequestContext.RouteData.Values["id"];
             ProfileModels profile = null;
-            if (userId != null) {
+            if (!string.IsNullOrWhiteSpace(userId)) {
                 profile = profileRepository.Get(userId);
             } else {
                 profile = profileRepository.Get((string)profileId);

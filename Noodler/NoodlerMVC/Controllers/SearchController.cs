@@ -16,12 +16,6 @@ namespace NoodlerMVC.Controllers {
             profileRepository = new ProfileRepository(context);
         }
 
-        //public ActionResult Index() {
-        //    List<ProfileModels> allProfiles = profileRepository.GetAllProfilesExceptCurrent(User.Identity.GetUserId());
-
-        //    return View(allProfiles);
-        //}
-
         public ActionResult Index() {
             string currentUser = User.Identity.GetUserId();
             List<ProfileModels> allProfiles = profileRepository.GetAllProfilesExceptCurrent(currentUser);
